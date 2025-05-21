@@ -1,0 +1,41 @@
+{
+  "name": "hello-world.cm",
+  "version": "0.1.0",
+  "type": "module",
+  "home": "https://docs.coinweb.io/gettingstarted",
+  "description": "Coinweb's hello world contract module",
+  "scripts": {
+    "build": "yarn build:files && yarn pack:all",
+    "build:files": "yarn clean && yarn g:tsc -p tsconfig.build.json && NODE_ENV=production cweb-tool build-cm .",
+    "start": "node src/offchain/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "pack:all": "yarn pack:cweb && yarn pack:yarn",
+    "pack:cweb": "NODE_NO_WARNINGS=1 cweb-tool pack . dist/out ../../.cweb-config/cweb-pack.yaml -c ../../.cweb-config/config.yaml --profile $REGISTRATION_PROFILE",
+    "pack:yarn": "cd dist/out && echo > yarn.lock && yarn pack -o my-contract-module.tgz",
+    "call-contract": "cweb-tool call deploy/calls.yaml -c ../../.cweb-config/config.yaml --profile $REGISTRATION_PROFILE",
+    "clean": "yarn g:rimraf cweb_dist dist .calls.yaml",
+    "typecheck": "yarn g:tsc --noEmit"
+  },
+  "dependencies": {
+    "@coinweb/wallet-lib": "^0.1.113-esm"
+  },
+  "main": "dist/out/cweb_dist/offchain/index.js",
+  "engines": {
+    "cweb_interpreter": "550d8ed63bfa58809cd2079cb7dda107626b8d74fcbbc65be7fd52e0926a3ea6"
+  },
+  "devDependencies": {
+    "@coinweb/contract-kit": "0.2.1",
+    "@coinweb/cweb-tool": "2.0.20-0e97bb22",
+    "@coinweb/self-register": "0.1.3",
+    "@types/lodash.isequal": "^4.5.8",
+    "@types/node": "^20.11.28",
+    "esbuild": "^0.20.2",
+    "js-yaml": "^4.1.0",
+    "lodash.isequal": "^4.5.0",
+    "replace": "^1.2.2",
+    "vitest": "^1.4.0",
+    "write-yaml-file": "^5.0.0"
+  }
+}

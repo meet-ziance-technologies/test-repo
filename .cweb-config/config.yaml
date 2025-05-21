@@ -1,0 +1,66 @@
+#
+# When using `cweb-tool`, this is one of the profiles.  Use the `--profile devnet`
+# option to select this profile.
+devnet:
+  # The wallet secret for deploying.
+  mnemonic: priority supply couple broccoli balcony sort flag keep original wrong pottery version
+
+  # This is the shard `cweb-tool` will write L1 transactions to
+  shardToWrite: DEVNET_L1A
+
+  # This is the shard the smart contracts will be registered to.
+  # If this is different from the shardToWrite, then `cweb-tool` will wrap the action in a
+  # jump transaction so the transaction jumps from `shardToWrite`, to this shard for execution.
+  #
+  # Thus you can write to for example BNB and execute on Ethereum to save on cost.
+  shardToExecute: DEVNET_L1A
+
+  endpoint: https://api-devnet.coinweb.io/wallet
+
+  # The smart contracts used to upload data to a shard
+  bootstrapConfig:
+    # This smart contract is a key/value store (using claims) that keeps all
+    # of the "files" in the file systems of the smart contracts you register
+    #
+    # When registering, you will upload files to this contract, but only those
+    # files that do not already exist here.
+    dataHasher: data_hasher_v2
+
+    # The controller, tied to the data hasher is responsible for combining chunks
+    # of data uploaded, decompressing, and giving the resulting file to the
+    # data hasher
+    controller: controller_v2
+    dependencies:
+      - decompressor_v2
+      - data_hasher
+
+  # Whether to move CWEB into a temporary wallet before executing actions.
+  unsafe: true
+
+  replicateConfig:
+    replicator: replicant.cm v0.0.2
+    replicas: []
+
+  # When this is configured, execution of actions will register the contract
+  # modules in this repo.
+  #
+  #  gitRemoteLockIndexRepo: null
+  #
+  # This is the definition of the "world" as seen by the developer.
+  pathToIndexFile: .cweb-config/dapp-ecosystem.yaml
+
+  # This is a generate file, from `yarn create-index`, a fully expanded version of
+  # the `dapp-ecosystem.yaml`.  You can potentially edit this file to remove things
+  # you do not want to have included in your "world" but you are unable to remove from
+  # `dapp-ecosystem.yaml`
+  pathToLockIndexFile: .dapp-ecosystem-lock.yaml
+
+  # This is the raw list of actions required to generate everything in the
+  # `.dapp-ecosystem-lock.yarn`
+  pathToRawActionFile: .unfiltered-actions.yaml
+
+  # This is the filtered list of actions, the output of `yarn filter-action`.
+  # .e. it is the raw action file with everything that already exists on the shard, removed.
+  pathToFilteredActionFile: .actions.yaml
+
+  #  packageRegistry: null
