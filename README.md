@@ -104,3 +104,13 @@ Here are the commands you can run, as defined in the `package.json` file:
 Running `yarn build` will execute most of these commands and publish your smart contract.
 
 The project in `offchain/*` contains a small program that will read the claim written by the smart contract. Enjoy building your dApp!
+
+## preview
+
+**Listing Page**
+![image](https://github.com/user-attachments/assets/0b4d639b-6902-4384-9ef5-0b1310a9380b)
+
+**Owned Property**
+<img width="1920" alt="Screenshot 2025-05-22 at 8 19 06 PM" src="https://github.com/user-attachments/assets/a97fd0e4-619f-452b-bf63-b28d0f4b2d58" />
+
+
