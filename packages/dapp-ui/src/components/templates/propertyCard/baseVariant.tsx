@@ -6,7 +6,9 @@ interface PropertyCardV1Props {
   item: Property;
 }
 export const PropertyCardV1 = (props: PropertyCardV1Props) => {
-  const handleBuyNow = (id: string) => {};
+  const handleBuyNow = (id: string) => {
+    console.log('>>', id);
+  };
 
   return (
     <Card>

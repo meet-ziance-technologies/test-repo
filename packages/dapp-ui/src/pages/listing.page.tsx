@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Grid, Stack, TablePagination, Typography } from '@mui/material';
+import { Box, CircularProgress, Grid, TablePagination, Typography } from '@mui/material';
 import { PropertyCardV1 } from '../components/templates/propertyCard/baseVariant';
 import { PropertyData } from '../util/propData/property.data';
 import { useEffect, useMemo, useState } from 'react';
@@ -32,7 +32,7 @@ export const ListingPage = () => {
     setListingState({ ...listingState, isLoading: true, isError: false });
 
     try {
-      const data = await new Promise<Property[]>((resolve, reject) => {
+      const data = await new Promise<Property[]>((resolve) => {
         setTimeout(() => {
           resolve(Array(13).fill(PropertyData));
         }, 2000);
