@@ -1,0 +1,5 @@
+
+[build]
+  base = "packages/dapp-ui" # path to the frontend app
+  publish = "packages/dapp-ui/dist" # or "build" depending on your setup
+  command = "npm i && npm run build"
